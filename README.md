@@ -34,62 +34,107 @@ Project so called "using 4*4matrix keypad to turning on a lamp" we are able to d
              # SOURCE CODE
 
 #include <Keypad.h>
+
 char* password = "456";  // change the password here, just pick any 3 numbers
+
 int position = 0;
+
 const byte ROWS = 4;
+
 const byte COLS = 3;
 
+
 char keys[ROWS][COLS] = {
+
 {'#','0','*'},
+
 {'9','8','7'},
+
 {'6','5','5'},
+
 {'3','2','1'},
+
 };
 
+
 byte rowPins[ROWS] = {5, 6,7,8 };//Pin may change according to sutability
+
 byte colPins[COLS] = { 2,3,4};
+
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
+
 int relay=11;
 
 
+
 void setup()
+
 {
 
 
 pinMode(relay, OUTPUT);
+
 setLocked(true);
+
 }
+
 
 void loop()
+
 {
+
 char key = keypad.getKey();
+
 if (key == '*' || key == '#')
+
 {
+
 position = 0;
+
 setLocked(true);
+
 }
+
 if (key == password[position])
+
 {
+
 
 if (position == 3)
-{
-setLocked(false);
-}
-delay(100);
-}
-void setLocked(int locked)
-{
-if (locked)  
+
 {
 
-digitalWrite(11,  LOW);
+setLocked(false);
+
 }
-else
+
+delay(100);
+
+}
+
+void setLocked(int locked)
+
 {
+
+if (locked) 
+
+{
+
+
+digitalWrite(11,  LOW);
+
+}
+
+else
+
+{
+
 
 
 digitalWrite(11,HIGH);
+
 }
+
 }
 
 # SIMULATION IN PROTEUS
